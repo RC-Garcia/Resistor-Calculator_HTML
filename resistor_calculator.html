@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resistor Calculator</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #000080, #000040);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resistor Calculator</h1>
+        <label for="voltage">Input Voltage (V):</label><br>
+        <input type="number" id="voltage" step="0.01"><br>
+        <label for="current">Operating Current (I):</label><br>
+        <input type="number" id="current" step="0.01"><br>
+        <label for="load">Load (R<sub>L</sub>):</label><br>
+        <input type="number" id="load" step="0.01"><br><br>
+        <button onclick="calculateResistor()">Calculate Resistor</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateResistor() {
+            const voltage = parseFloat(document.getElementById('voltage').value);
+            const current = parseFloat(document.getElementById('current').value);
+            const load = parseFloat(document.getElementById('load').value);
+
+            if (isNaN(voltage) || isNaN(current) || isNaN(load)) {
+                alert('Please enter valid numbers.');
+                return;
+            }
+
+            const neededResistor = (voltage - (current * load)) / current;
+
+            document.getElementById('result').innerText = `Needed Resistor: ${neededResistor.toFixed(2)} Ω`;
+        }
+    </script>
+</body>
+</html>
